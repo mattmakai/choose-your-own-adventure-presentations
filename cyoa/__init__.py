@@ -11,4 +11,4 @@ redis_db = redis.StrictRedis(host=REDIS_SERVER, port=REDIS_PORT, db=REDIS_DB)
 
 socketio = SocketIO(app)
 
-from . import views #, websockets
+from . import views

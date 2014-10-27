@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Choose Your Own Adventure Presentations with Reveal.js!</title>
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <link rel="stylesheet" href="/static/css/reveal.css">
+        <link rel="stylesheet" href="/static/css/default.css" id="theme">
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="/static/css/zenburn.css">
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+        <div class="reveal">
+            <div class="slides"> 
+				<section>
+                    <h1>
+                        Choose Your Own Adventure!
+                    </h1>
+                    <h3>With SMS voting</h3>
+				</section>
+
+                <section>
+                    <div>
+                        <h2>Text "left" or "right" to</h2>
+                        <h1>(xxx) 555-1234</h1>
+                    </div>
+                    <br>
+                    <div style="display: inline;">
+                        <div style="float: left;">
+                            <h2><a href="#/2">left</a></h2>
+                            <h1><div id="pets">0</div> votes</h1>
+                        </div>
+                        <div style="float: right;">
+                            <h2><a href="#/3">right</a></h2>
+                            <h1><div id="melon">0</div> votes</h1>
+                        </div>
+                    </div>
+                </section>
+               
+                <!-- linked from first choice --> 
+                <section>
+                    <h1>Left</h1>
+                </section>
+                
+                <!-- linked from second choice --> 
+                <section>
+                    <h1>Right</h1>
+                </section>
+
+            </div>
+        </div>
+
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script> 
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+        <script src="/static/js/head.min.js"></script>
+        <script src="/static/js/reveal.js"></script>
+
+        <script>
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                ]
+            });
+
+            $(document).ready(function() {
+                namespace = '/cyoa';
+                var socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
+
+                socket.on('msg', function(msg) {
+                    var checkDiv = $('#' + msg.div);
+                    if (checkDiv.length > 0) {
+                        checkDiv.html(msg.val);
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
