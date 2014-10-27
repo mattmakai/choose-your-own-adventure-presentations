@@ -1,34 +1,23 @@
 <!doctype html>
 <html lang="en">
-
     <head>
         <meta charset="utf-8">
-
         <title>Choose Your Own Adventure Presentations with Reveal.js!</title>
-
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-
         <link rel="stylesheet" href="/static/css/reveal.css">
         <link rel="stylesheet" href="/static/css/default.css" id="theme">
-
-        <!-- For syntax highlighting -->
         <link rel="stylesheet" href="/static/css/zenburn.css">
-
         <!--[if lt IE 9]>
         <script src="lib/js/html5shiv.js"></script>
         <![endif]-->
     </head>
-
     <body>
         <div class="reveal">
             <div class="slides"> 
 				<section>
-                    <h1>
-                        Choose Your Own Adventure!
-                    </h1>
+                    <h1>Choose Your Own Adventure!</h1>
                     <h3>With SMS voting</h3>
 				</section>
 
@@ -63,24 +52,20 @@
             </div>
         </div>
 
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script> 
+        <script type="text/javascript" 
+            src="http://code.jquery.com/jquery-1.11.1.min.js"></script> 
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
         <script src="/static/js/head.min.js"></script>
         <script src="/static/js/reveal.js"></script>
 
         <script>
-            // Full list of configuration options available here:
-            // https://github.com/hakimel/reveal.js#configuration
             Reveal.initialize({
                 controls: true,
                 progress: true,
                 history: true,
                 center: true,
-
-                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-                transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
-
-                // Optional libraries used to extend on reveal.js
+                theme: Reveal.getQueryHash().theme,
+                transition: Reveal.getQueryHash().transition || 'default',
                 dependencies: [
                 ]
             });
