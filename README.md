@@ -10,7 +10,8 @@ coming soon via the [Twilio blog](https://twilio.com/blog/).
 You can check out how
 these branching presentations work if you watch the DjangoCon 2014 video 
 "[Choose Your Own Django Deployment Adventure](https://www.youtube.com/watch?v=QrFEKghISEI)" 
-with Matt and [Kate Heddleston](https://twitter.com/heddle317). 
+with [Matt Makai](https://twitter.com/mattmakai) and 
+[Kate Heddleston](https://twitter.com/heddle317). 
 
 
 ## Software stack
@@ -27,5 +28,5 @@ Yes, we used a Flask app at DjangoCon. For shame.
 
 
 ## Authors
-Created by [Matt Makai](http://www.mattmakai.com/) and 
+Created by [Matt Makai](http://github.com/makaimc) and 
 [Kate Heddleston](https://github.com/heddle317). 
