@@ -1,3 +1,4 @@
+import cgi
 from flask import render_template, abort
 from jinja2 import TemplateNotFound
 from twilio import twiml
@@ -24,6 +25,10 @@ def twilio_callback():
     message = request.form.get('Body', '').lower()
     if to == TWILIO_NUMBER: 
         redis_db.incr(message)
+        socketio.emit('msg', {'div': cgi.escape(message),
+            'val': redis_db.get(message)},
+            namespace='/cyoa')
+
     resp = twiml.Response()
     resp.message("Thanks for your vote!")
     return str(resp)
