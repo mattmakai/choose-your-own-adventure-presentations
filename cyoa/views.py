@@ -5,7 +5,7 @@ from twilio import twiml
 from twilio.rest import TwilioRestClient
 
 from .config import TWILIO_NUMBER
-from . import app, redis_db
+from . import app, redis_db, socketio
 
 client = TwilioRestClient()
 
