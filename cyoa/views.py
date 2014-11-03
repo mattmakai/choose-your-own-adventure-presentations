@@ -6,7 +6,7 @@ from twilio.rest import TwilioRestClient
 
 from .config import TWILIO_NUMBER
 
-from . import app, redis_db
+from . import app, redis_db, socketio
 
 client = TwilioRestClient()
 
@@ -25,6 +25,9 @@ def twilio_callback():
     message = request.form.get('Body', '').lower()
     if to == TWILIO_NUMBER:
         redis_db.incr(cgi.escape(message))
+        socketio.emit('msg', {'div': cgi.escape(message),
+                              'val': redis_db.get(message)},
+                      namespace='/cyoa')
     resp = twiml.Response()
     resp.message("Thanks for your vote!")
     return str(resp)

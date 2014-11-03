@@ -68,6 +68,24 @@
                 transition: Reveal.getQueryHash().transition || 'default',
                 dependencies: []
             });
+
+            $(document).ready(function() {
+                namespace = '/cyoa';
+                var socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
+
+                /* add and edit choices here */
+                var appropriate_choices = ['left','right',];
+
+                socket.on('msg', function(msg) {
+                    /* ensure valid vote and div exists */
+                    if (appropriate_choices.indexOf(msg.div) >= 0) {
+                        var checkDiv = $('#' + msg.div);
+                        if (checkDiv.length > 0) {
+                            checkDiv.html(msg.val);
+                        }
+                    }
+                });
+            });
         </script>
     </body>
 </html>
