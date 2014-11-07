@@ -3,7 +3,8 @@ Use this code to create real-time branching presentations so
 audiences can choose the path through your next technical talk.
 
 Detailed installation instructions and a walkthrough of the code base
-coming soon via the [Twilio blog](https://twilio.com/blog/).
+can be found in 
+[this blog post I wrote for Twilio](https://www.twilio.com/blog/2014/11/choose-your-own-adventure-presentations-with-reveal-js-python-and-websockets.html).
 
 
 ## See it in action
