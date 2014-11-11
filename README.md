@@ -8,6 +8,11 @@ can be found in
 
 
 ## See it in action
+Here's a screenshot of the vanilla choices screen. You can of course modify
+this initial screen with your own styles and visualizations.
+
+<img src="./cyoa/static/img/cyoa-choices.jpg">
+
 You can check out how
 these branching presentations work if you watch the DjangoCon 2014 video 
 "[Choose Your Own Django Deployment Adventure](https://www.youtube.com/watch?v=QrFEKghISEI)" 
