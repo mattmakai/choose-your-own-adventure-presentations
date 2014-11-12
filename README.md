@@ -24,6 +24,18 @@ these branching presentations work if you watch the DjangoCon 2014 video
 with [Matt Makai](https://twitter.com/mattmakai) and 
 [Kate Heddleston](https://twitter.com/heddle317). 
 
+Here's how the screen looks initially.
+<img src="./cyoa/static/img/cyoa-no-votes.jpg">
+
+After votes start coming in...
+<img src="./cyoa/static/img/cyoa-choices.jpg">
+
+
+Here's an example screenshot I took from the DjangoCon talk with DjangoCon
+styling.
+<img src="./cyoa/static/img/djangocon.jpg">
+
+
 
 ## Software stack
 Uses 
