@@ -73,3 +73,28 @@ def admin_list_presentations():
     presentations = Presentation.query.all()
     return render_template('admin/presentations.html', 
                            presentations=presentations)
+
+@app.route('/admin/presentation/', methods=['GET', 'POST'])
+@login_required
+def admin_new_presentation():
+    form = PresentationForm()
+    if form.validate_on_submit():
+        p = Presentation(name=form.name.data, filename=form.filename.data)
+        p.is_active = form.is_active.data
+        p.choices_number = form.choices_number
+        p.choices_email = form.choices_email
+        db.session.add(p)
+        db.session.commit()
+        return redirect(url_for('admin_list_presentations'))
+    return render_template('admin_new_presentation', form=form)
+
+
+@app.route('/admin/presentation/<int:id>/', methods=['GET', 'POST'])
+@login_required
+def admin_edit_presentation(id):
+    presentation = Presentation.get_object_or_404(id)
+    return render_template('admin/presentation.html',
+                           presentation=presentation)
+
+
+
