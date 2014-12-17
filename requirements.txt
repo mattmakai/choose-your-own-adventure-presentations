@@ -3,6 +3,7 @@ Flask-Script==2.0.5
 Flask-SocketIO==0.4.1
 Flask-Login==0.2.11
 Flask-SQLAlchemy==2.0
+Flask-WTF==0.10.3
 
 gunicorn==19.1.1
 
