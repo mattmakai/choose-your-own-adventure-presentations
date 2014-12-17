@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="col-md-10">
+            <h1>Presentations</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Is Active?</th>
+                        <th>Choices Number</th>
+                        <th>Choices Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for p in presentations %}
+                    <tr>
+                        <td><a href="#">{{ p.name }}</a></td>
+                        <td>{{ p.is_active }}</td>
+                        <td>{{ p.choices_number }}</td>
+                        <td>{{ p.choices_email }}</td>
+                    </tr>
+                {% else %}
+                    No presentations found.
+                {% endfor %}
+                </tbody>
+            </table>
+            <div style="text-align: right;">
+                <a href="#" class="btn btn-primary">New Presentation</a>
+                <a href="#" class="btn btn-primary"></a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

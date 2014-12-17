@@ -56,13 +56,20 @@ def sign_in():
         user = User.query.filter_by(email=form.email.data).first()
         if user is not None and user.verify_password(form.password.data):
             login_user(user)
-            return redirect(url_for('admin_main'))
+            return redirect(url_for('admin_list_presentations'))
     return render_template('admin/sign_in.html', form=form, no_nav=True)
 
 
-@app.route('/sign-out/')
+@app.route('/sign-out/', methods=['GET'])
 @login_required
 def sign_out():
     logout_user()
     return redirect(url_for('list_public_presentations'))
 
+
+@app.route('/admin/presentations/', methods=['GET'])
+@login_required
+def admin_list_presentations():
+    presentations = Presentation.query.all()
+    return render_template('admin/presentations.html', 
+                           presentations=presentations)
