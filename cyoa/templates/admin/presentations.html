@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block nav %}
+    {% include "nav.html" %}
+{% endblock %}
+
 {% block content %}
 <div class="container">
     <div class="row">
@@ -35,7 +39,8 @@
     <div class="row">
         <div class="col-md-10">
                 <div style="margin-top: 20px;">
-                    <a href="#" class="btn btn-primary">New Presentation</a>
+                    <a href="{{ url_for('admin_new_presentation') }}"
+                       class="btn btn-primary">New Presentation</a>
                 </div>
             </div>
         </div>

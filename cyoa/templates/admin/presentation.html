@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block nav %}
+    {% include "nav.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+            {% from "partials/_formhelpers.html" import render_field %}
+            <form action="{{ url_for('admin_new_presentation') }}" 
+                  method="post">
+                <div>
+                {{ form.csrf_token }}
+                {{ render_field(form.name) }}
+                {{ render_field(form.filename) }}
+                </div>
+                <div>
+                <input type="submit" class="btn btn-success" 
+                       value="Create Presentation"></input>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

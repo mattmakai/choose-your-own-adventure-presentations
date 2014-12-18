@@ -3,7 +3,7 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField, \
                     DateField
 from wtforms.validators import Required, Length, Email, Regexp, EqualTo
 from wtforms import ValidationError
-from .models import User
+from .models import User, Presentation
 
 
 class LoginForm(Form):
@@ -28,11 +28,9 @@ class PresentationForm(Form):
     filename = StringField('File name', validators=[Required(), 
                                                     Length(1, 255)])
     is_active = BooleanField()
-    number = StringField('Text-in phone number', validators=[Length(8, 32)])
-    email = StringField('Text-in email address', validators=[Length(4, 40),
-                                                             Email()])
-    choices = StringField('Choices (semicolon delimited)', 
-                          validators=[Required()])
+    number = StringField('Text-in phone number', validators=[Length(0, 32)])
+    email = StringField('Text-in email address', validators=[Length(0, 40)])
+    choices = StringField('Choices (semicolon delimited)')
 
     def validate(self):
         if not Form.validate(self):

@@ -80,13 +80,18 @@ def admin_new_presentation():
     form = PresentationForm()
     if form.validate_on_submit():
         p = Presentation(name=form.name.data, filename=form.filename.data)
-        p.is_active = form.is_active.data
-        p.choices_number = form.choices_number
-        p.choices_email = form.choices_email
+        """
+        if form.is_active_data:
+            p.is_active = form.is_active.data
+        if form.choices_number.data:
+            p.choices_number = form.choices_number.data
+        if form.choices_email.data:
+            p.choices_email = form.choices_email.data
         db.session.add(p)
         db.session.commit()
+        """
         return redirect(url_for('admin_list_presentations'))
-    return render_template('admin_new_presentation', form=form)
+    return render_template('admin/presentation.html', form=form)
 
 
 @app.route('/admin/presentation/<int:id>/', methods=['GET', 'POST'])
