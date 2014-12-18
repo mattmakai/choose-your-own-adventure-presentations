@@ -9,16 +9,20 @@
     <div class="row">
         <div class="col-md-10">
             {% from "partials/_formhelpers.html" import render_field %}
+            {% if is_new %}
             <form action="{{ url_for('admin_new_presentation') }}" 
                   method="post">
+            {% else %} 
+            <form action="{{ url_for('admin_edit_presentation', id=presentation.id) }}" method="post">
+            {% endif %}
                 <div>
-                {{ form.csrf_token }}
-                {{ render_field(form.name) }}
-                {{ render_field(form.filename) }}
+                    {{ form.csrf_token }}
+                    {{ render_field(form.name) }}
+                    {{ render_field(form.filename) }}
                 </div>
                 <div>
                 <input type="submit" class="btn btn-success" 
-                       value="Create Presentation"></input>
+                       value="Save Presentation"></input>
                 </div>
             </form>
         </div>

@@ -32,11 +32,3 @@ class PresentationForm(Form):
     email = StringField('Text-in email address', validators=[Length(0, 40)])
     choices = StringField('Choices (semicolon delimited)')
 
-    def validate(self):
-        if not Form.validate(self):
-            return False
-        f = Presentation.query.filter_by(filename=self.filename.data).first()
-        if f is not None:
-            self.filename.append('File name must be new and unique.')
-            return False
-        return True

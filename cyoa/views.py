@@ -89,15 +89,26 @@ def admin_new_presentation():
         db.session.add(p)
         db.session.commit()
         return redirect(url_for('admin_list_presentations'))
-    return render_template('admin/presentation.html', form=form)
+    return render_template('admin/presentation.html', form=form, is_new=True)
 
 
 @app.route('/admin/presentation/<int:id>/', methods=['GET', 'POST'])
 @login_required
 def admin_edit_presentation(id):
-    presentation = Presentation.get_object_or_404(id)
-    return render_template('admin/presentation.html',
-                           presentation=presentation)
+    form = PresentationForm()
+    p = Presentation.query.get_or_404(id)
+    if form.validate_on_submit():
+        p.name = form.name.data
+        p.filename = form.filename.data
+        # todo: save rest of fields
+        db.session.merge(p)
+        db.session.commit()
+    else:
+        form.name.data = p.name
+        form.filename.data = p.filename
+        # todo: fill in rest of fields
+    return render_template('admin/presentation.html', form=form,
+                           presentation=p)
 
 
 

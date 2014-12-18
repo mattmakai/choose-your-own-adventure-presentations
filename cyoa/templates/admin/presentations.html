@@ -25,7 +25,7 @@
                     <tbody>
                     {% for p in presentations %}
                         <tr>
-                            <td><a href="#">{{ p.name }}</a></td>
+                            <td><a href="{{ url_for('admin_edit_presentation', id=p.id) }}">{{ p.name }}</a></td>
                             <td>{{ p.is_active }}</td>
                             <td>{{ p.choices_number }}</td>
                             <td>{{ p.choices_email }}</td>
