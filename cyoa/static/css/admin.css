@@ -510,3 +510,9 @@
 .datepicker.dropdown-menu td {
   padding: 4px 5px;
 }
+.btn-top-margin {
+    margin-top: 25px;
+}
+.admin-field {
+    margin-top: 15px;
+}

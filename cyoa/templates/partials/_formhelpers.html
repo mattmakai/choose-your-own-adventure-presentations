@@ -1,5 +1,5 @@
 {% macro render_field(field) %}
-    <dt style="text-align: left;">{{ field.label }}
+    <dt style="text-align: left;" class="admin-field">{{ field.label }}
     {% if field.errors %}
         <ul class="errors">
             {% for error in field.errors %}
