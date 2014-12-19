@@ -40,7 +40,8 @@ class Presentation(db.Model):
     __tablename__ = 'presentations'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), unique=True)
-    filename = db.Column(db.String(256))    
+    filename = db.Column(db.String(256))
+    url_slug = db.Column(db.String(128))
     is_active = db.Column(db.Boolean, default=False)
     choices_number = db.Column(db.String(32), default="")
     choices_email = db.Column(db.String(40), default="")

@@ -27,6 +27,8 @@ class PresentationForm(Form):
                                                         Length(1, 60)])
     filename = StringField('File name', validators=[Required(), 
                                                     Length(1, 255)])
+    url_slug = StringField('Public URL slug', validators=[Required(),
+                                                          Length(1, 255)]) 
     is_active = BooleanField()
     number = StringField('Text-in phone number', validators=[Length(0, 32)])
     email = StringField('Text-in email address', validators=[Length(0, 40)])

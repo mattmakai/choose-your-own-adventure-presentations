@@ -19,6 +19,10 @@
                     {{ form.csrf_token }}
                     {{ render_field(form.name) }}
                     {{ render_field(form.filename) }}
+                    {{ render_field(form.url_slug) }}
+                    {{ render_field(form.is_active) }}
+                    {{ render_field(form.number) }}
+                    {{ render_field(form.choices) }}
                 </div>
                 <div>
                 <input type="submit" class="btn btn-success" 
