@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="col-md-offset-2 col-md-8">
+        <div id="login">
+            <h1>Sign In</h1>
+            {% from "partials/_formhelpers.html" import render_field %}
+            <form method="post" action="{{ url_for('sign_in') }}" 
+                  id="login-form">
+                {{ form.csrf_token }}
+                {{ render_field(form.email, required=True) }}
+                <br>
+                {{ render_field(form.password, required=True) }}
+                <div style="margin-top: 10px; text-align: right;">
+                    <input class="btn btn-success" 
+                           type="submit" value="Sign in" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

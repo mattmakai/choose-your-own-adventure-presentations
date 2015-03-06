@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block nav %}
+    {% include "nav.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <h1>Presentations</h1>
+            {% if not presentations %}
+                No presentations found. 
+                <a href="{{ url_for('admin_new_presentation') }}">Create your first one</a>.
+            {% else %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Is Active?</th>
+                            <th>Choices Number</th>
+                            <th>Choices Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for p in presentations %}
+                        <tr>
+                            <td><a href="{{ url_for('admin_edit_presentation', id=p.id) }}">{{ p.name }}</a></td>
+                            <td>{{ p.is_active }}</td>
+                            <td>{{ p.choices_number }}</td>
+                            <td>{{ p.choices_email }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+                <div style="margin-top: 20px;">
+                    <a href="{{ url_for('admin_new_presentation') }}"
+                       class="btn btn-primary">New Presentation</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
