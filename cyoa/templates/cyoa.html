@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Choose Your Own Adventure Presentations with Reveal.js!</title>
+        <title>Twilio API Workshop</title>
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -16,38 +16,90 @@
     <body>
         <div class="reveal">
             <div class="slides">
+                <section style="text-align: left;">
+                    <h1>Twilio Web API</h1>
+                    <h2>Women Who Code DC</h2>
+                    <p>Matt Makai | Twilio Developer Evangelist</p>
+                    <p>@mattmakai | makaimc on GitHub</p>
+                </section>
+                
+                <section>
+                    <div>
+                        <h2>Text "yes" or "no" to</h2>
+                        <h1>(202) 759-8445</h1>
+                    </div>
+                    <br>
+                    <div style="display: inline;">
+                        <div style="float: left;">
+                            <h2><a href="#/2">yes</a></h2>
+                            <h1><div id="yes">0</div> votes</h1>
+                        </div>
+                        <div style="float: right;">
+                            <h2><a href="#/3">no</a></h2>
+                            <h1><div id="no">0</div> votes</h1>
+                        </div>
+                    </div>
+                </section>
+
+                
+                <section>
+                    <h1>Demo time!</h1>
+                </section>
+                
+                <section style="text-align: left;">
+                    <h2>Tonight</h2>
+                    <ul style="font-size: 1.75em; line-height: 1.25em;">
+                        <li>Pair up</li>
+                        <li>SMS, MMS and voice calls</li>
+                        <li>Mustachin' selfies</li>
+                        <li>Choose Your Own Adventure Presentations</li>
+                    </ul>
+                </section>
+                
+                <section>
+                    <h2>Promo code</h2>
+                    <h1>TwilioWWDC</h1>
+                </section>
+                
+                <section>
+                    <h1>SMS, MMS, voice</h1>
+                </section>
+                
+                <section>
+                    <h1>Mustachin' selfies!</h1>
+                    <br>
+                    <h1>(202) 759-2423</h1>
+                </section>
+
+                <section>
+                    <div>
+                        <h2>Text "done" or "more" to</h2>
+                        <h1>(202) 759-8445</h1>
+                    </div>
+                    <br>
+                    <div style="display: inline;">
+                        <div style="float: left;">
+                            <h2><a href="#/2">done</a></h2>
+                            <h1><div id="done">0</div> votes</h1>
+                        </div>
+                        <div style="float: right;">
+                            <h2><a href="#/3">more</a></h2>
+                            <h1><div id="more">0</div> votes</h1>
+                        </div>
+                    </div>
+                </section>
+
                 <section>
                     <h1>Choose Your Own Adventure!</h1>
                     <h3>With SMS voting</h3>
                 </section>
 
-                <section>
-                    <div>
-                        <h2>Text "left" or "right" to</h2>
-                        <!-- replace this with your Twilio number -->
-                        <h1>(xxx) 555-1234</h1>
-                    </div>
-                    <br>
-                    <div style="display: inline;">
-                        <div style="float: left;">
-                            <h2><a href="#/2">left</a></h2>
-                            <h1><div id="left">0</div> votes</h1>
-                        </div>
-                        <div style="float: right;">
-                            <h2><a href="#/3">right</a></h2>
-                            <h1><div id="right">0</div> votes</h1>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- linked from first choice -->
-                <section>
-                    <h1>Left</h1>
-                </section>
-
-                <!-- linked from second choice -->
-                <section>
-                    <h1>Right</h1>
+                <section style="text-align: left;">
+                    <h1>Matt Makai</h1>
+                    <h2>Twilio Developer Evangelist</h2>
+                    <h2>makai@twilio.com</h2>
+                    <h2>makaimc on GitHub</h2>
+                    <h2>@mattmakai on Twitter</h2>
                 </section>
 
             </div>
@@ -60,7 +112,7 @@
 
         <script>
             Reveal.initialize({
-                controls: true,
+                controls: false,
                 progress: true,
                 history: true,
                 center: true,
@@ -74,7 +126,7 @@
                 var socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
 
                 /* add and edit choices here */
-                var appropriate_choices = ['left','right',];
+                var appropriate_choices = ['done','more','yes','no'];
 
                 socket.on('msg', function(msg) {
                     /* ensure valid vote and div exists */
