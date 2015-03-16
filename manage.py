@@ -11,7 +11,7 @@ from flask.ext.script import Manager, Shell
 manager = Manager(app)
 
 def make_shell_context():
-    return dict(app=app, redis_db=redis_db, db=db, User=User, 
+    return dict(app=app, redis_db=redis_db, db=db, User=User,
                 Presentation=Presentation, Choice=Choice)
 
 manager.add_command("shell", Shell(make_context=make_shell_context))

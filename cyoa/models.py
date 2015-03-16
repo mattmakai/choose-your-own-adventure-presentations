@@ -41,15 +41,11 @@ class Presentation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), unique=True)
     filename = db.Column(db.String(256))
-    url_slug = db.Column(db.String(128))
+    slug = db.Column(db.String(128))
     is_active = db.Column(db.Boolean, default=False)
-    choices_number = db.Column(db.String(32), default="")
-    choices_email = db.Column(db.String(40), default="")
-    choices = db.relationship('Choice', lazy='dynamic')
-
-    def __init__(self, name, filename):
-        self.name = name
-        self.filename = filename
+    voting_number = db.Column(db.String(32), default="")
+    enable_browser_voting = db.Column(db.Boolean, default=False)
+    choices_list = db.relationship('Choice', lazy='dynamic')
 
     def __repr__(self):
         return '<Presentation %r>' % self.name
@@ -63,7 +59,6 @@ class Choice(db.Model):
     __tablename__ = 'choices'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), unique=True)
-    votes = db.Column(db.Integer, default=0)
     presentation = db.Column(db.Integer, db.ForeignKey('presentations.id'))
 
     def __init__(self, name):

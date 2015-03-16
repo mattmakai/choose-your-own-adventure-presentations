@@ -19,12 +19,15 @@
                     {{ form.csrf_token }}
                     {{ render_field(form.name) }}
                     {{ render_field(form.filename) }}
-                    {{ render_field(form.url_slug) }}
-                    {{ render_field(form.number) }}
-                    {{ render_field(form.choices) }}
+                    {{ render_field(form.slug) }}
+                    {{ render_field(form.voting_number) }}
                     <dt style="text-align: left;" class="admin-field">
-                    {{ form.is_active.label }}
-                    {{ form.is_active }}
+                        {{ form.is_active.label }}
+                        {{ form.is_active }}
+                    </dt>
+                    <dt style="text-align: left;" class="admin-field">
+                        {{ form.enable_websocket_votes.label }}
+                        {{ form.enable_websocket_votes }}
                     </dt>
                 </div>
                 <div>

@@ -9,7 +9,7 @@ from .models import User, Presentation
 class LoginForm(Form):
     email = StringField('Email', validators=[Required(), Length(1, 64),
                                              Email()])
-    password = PasswordField('Password', validators=[Required(), 
+    password = PasswordField('Password', validators=[Required(),
                                                      Length(1, 32)])
 
     def validate(self):
@@ -23,14 +23,17 @@ class LoginForm(Form):
 
 
 class PresentationForm(Form):
-    name = StringField('Presentation name', validators=[Required(), 
+    name = StringField('Presentation name', validators=[Required(),
                                                         Length(1, 60)])
-    filename = StringField('File name', validators=[Required(), 
+    filename = StringField('File name', validators=[Required(),
                                                     Length(1, 255)])
-    url_slug = StringField('Public URL slug', validators=[Required(),
-                                                          Length(1, 255)]) 
+    slug = StringField('URL slug', validators=[Required(),
+                                               Length(1, 255)])
     is_active = BooleanField()
-    number = StringField('Text-in phone number', validators=[Length(0, 32)])
-    email = StringField('Text-in email address', validators=[Length(0, 40)])
-    choices = StringField('Choices (semicolon delimited)')
+    voting_number = StringField('Text-in phone number',
+                                validators=[Length(0, 32)])
+    enable_websocket_votes = BooleanField()
 
+
+class ChoicesForm(Form):
+    pass
