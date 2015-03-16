@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block nav %}
+    {% include "nav.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <h1>Story choices for {{ presentation.name }}</h1>
+            {% if choices|length == 0 %}
+                No choices found. 
+            {% else %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Choice</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for c in choices %}
+                        <tr>
+                            <td>{{ c.name }}</td>
+                            <td>X</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+                <form action="#" method="post">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

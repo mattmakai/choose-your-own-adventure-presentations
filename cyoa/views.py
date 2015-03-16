@@ -7,8 +7,8 @@ from twilio import twiml
 from twilio.rest import TwilioRestClient
 
 from .config import TWILIO_NUMBER
-from .forms import LoginForm, PresentationForm
-from .models import User, Presentation, Choice
+from .forms import LoginForm
+from .models import User, Presentation
 
 from . import app, redis_db, socketio, db, login_manager
 

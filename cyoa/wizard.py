@@ -1,8 +1,7 @@
 from flask import render_template, redirect, url_for
 from flask.ext.login import login_required, current_user
 
-from .config import TWILIO_NUMBER
-from .forms import LoginForm, PresentationForm
+from .forms import LoginForm, PresentationForm, ChoicesForm
 from .models import User, Presentation, Choice
 
 from . import app, db
@@ -45,6 +44,7 @@ def wizard_edit_presentation(id):
 
 @app.route('/wizard/presentation/<int:id>/choices/', methods=['GET'])
 @login_required
-def wizard_list_presentation_choices():
+def wizard_list_presentation_choices(id):
     p = Presentation.query.get_or_404(id)
-    return render_template('wizard/choices.html', presentation=p)
+    return render_template('wizard/choices.html', presentation=p,
+                           choices=p.choices_list.all())
