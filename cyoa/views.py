@@ -8,7 +8,7 @@ from twilio.rest import TwilioRestClient
 
 from .config import TWILIO_NUMBER
 from .forms import LoginForm
-from .models import User, Presentation
+from .models import Wizard, Presentation
 
 from . import app, redis_db, socketio, db, login_manager
 
@@ -16,7 +16,7 @@ client = TwilioRestClient()
 
 @login_manager.user_loader
 def load_user(userid):
-    return User.query.get(int(userid))
+    return Wizard.query.get(int(userid))
 
 
 @app.route('/', methods=['GET'])
@@ -53,7 +53,7 @@ def twilio_callback():
 def sign_in():
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = Wizard.query.filter_by(email=form.email.data).first()
         if user is not None and user.verify_password(form.password.data):
             login_user(user)
             return redirect(url_for('wizard_list_presentations'))

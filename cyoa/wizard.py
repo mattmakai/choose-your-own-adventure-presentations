@@ -2,7 +2,7 @@ from flask import render_template, redirect, url_for
 from flask.ext.login import login_required, current_user
 
 from .forms import LoginForm, PresentationForm, ChoicesForm
-from .models import User, Presentation, Choice
+from .models import Wizard, Presentation, Choice
 
 from . import app, db
 

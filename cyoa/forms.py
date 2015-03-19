@@ -3,7 +3,7 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField, \
                     DateField
 from wtforms.validators import Required, Length, Email, Regexp, EqualTo
 from wtforms import ValidationError
-from .models import User, Presentation
+from .models import Wizard, Presentation
 
 
 class LoginForm(Form):
@@ -15,7 +15,7 @@ class LoginForm(Form):
     def validate(self):
         if not Form.validate(self):
             return False
-        user = User.query.filter_by(email=self.email.data).first()
+        user = Wizard.query.filter_by(email=self.email.data).first()
         if user is not None and not user.verify_password(self.password.data):
             self.password.errors.append('Incorrect password.')
             return False
@@ -32,7 +32,7 @@ class PresentationForm(Form):
     is_active = BooleanField()
     voting_number = StringField('Text-in phone number',
                                 validators=[Length(0, 32)])
-    enable_websocket_votes = BooleanField()
+    enable_browser_voting = BooleanField()
 
 
 class ChoicesForm(Form):

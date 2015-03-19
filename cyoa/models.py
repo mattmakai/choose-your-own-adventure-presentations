@@ -5,11 +5,11 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 
 
-class User(UserMixin, db.Model):
+class Wizard(UserMixin, db.Model):
     """
-        Represents an admin user in cyoa.
+        Represents a wizard who can access the application.
     """
-    __tablename__ = 'users'
+    __tablename__ = 'wizards'
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(64), unique=True, index=True)
     password_hash = db.Column(db.String(128))
@@ -30,7 +30,7 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
 
     def __repr__(self):
-        return '<User %r>' % self.email
+        return '<Wizard %r>' % self.email
 
 
 class Presentation(db.Model):
