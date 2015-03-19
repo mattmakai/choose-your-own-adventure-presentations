@@ -1,6 +1,6 @@
 from flask.ext.wtf import Form
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, \
-                    DateField
+                    DateField, IntegerField
 from wtforms.validators import Required, Length, Email, Regexp, EqualTo
 from wtforms import ValidationError
 from .models import Wizard, Presentation
@@ -35,5 +35,7 @@ class PresentationForm(Form):
     enable_browser_voting = BooleanField()
 
 
-class ChoicesForm(Form):
-    pass
+class ChoiceForm(Form):
+    name = StringField('Voting choice name', validators=[Required(),
+                                                        Length(1, 60)])
+    decision_point = IntegerField('Decision Point #', validators=[Required()])

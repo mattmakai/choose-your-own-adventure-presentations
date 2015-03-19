@@ -30,7 +30,7 @@
                             <td>{{ p.is_active }}</td>
                             <td>{{ p.voting_number }}</td>
                             <td>{{ p.enable_browser_voting }}</td>
-                            <td><a href="{{ url_for('wizard_list_presentation_choices', id=p.id) }}">Manage choices</a></td>
+                            <td><a href="{{ url_for('wizard_list_presentation_choices', pres_id=p.id) }}">Manage choices</a></td>
                         </tr>
                     {% endfor %}
                     </tbody>
