@@ -8,7 +8,7 @@ from twilio.rest import TwilioRestClient
 
 from .config import TWILIO_NUMBER
 from .forms import LoginForm
-from .models import Wizard, Presentation
+from .models import Wizard, Presentation, Choice
 
 from . import app, redis_db, socketio, db, login_manager
 
@@ -22,7 +22,7 @@ def load_user(userid):
 @app.route('/', methods=['GET'])
 def list_public_presentations():
     presentations = Presentation.query.filter_by(is_active=True)
-    return render_template('list_presentations.html', 
+    return render_template('list_presentations.html',
                            presentations=presentations)
 
 
@@ -32,6 +32,16 @@ def presentation(slug):
         return render_template('/presentations/' + slug + '.html')
     except TemplateNotFound:
         abort(404)
+
+
+@app.route('/<slug>/vote/', methods=['GET'])
+def presentation_web_voting(slug):
+    presentations = Presentation.query.filter_by(slug=slug)
+    if presentations.count() > 0:
+        return render_template('voting.html', presentation=presentations.
+                               first(), choices=presentations.first().
+                               choices_list.order_by(Choice.decision_point))
+    return render_template("404.html"), 404
 
 
 @app.route('/cyoa/twilio/webhook/', methods=['POST'])
