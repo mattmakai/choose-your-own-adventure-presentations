@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>You're currently voting for {{ choice.slug }}. Stay on 
+                this page until all the votes are in for this choice.</h2>
+            <h1><span id="vote-counter">{{ votes }}</span> votes for 
+                {{ choice.slug }}</h1>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block js_body %}
+<script type="text/javascript" 
+    src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        namespace = '/cyoa';
+        var socket = io.connect('http://' + document.domain + ':' 
+                                + location.port + namespace);
+
+        window.onbeforeunload = function() {
+            socket.emit('unvote', 
+                        {'presentation_slug': '{{ presentation.slug }}',
+                         'decision': '{{ choice.decision_point }}',
+                         'choice': '{{ choice.slug }}'});
+        };
+
+        socket.emit('vote', {'presentation_slug': '{{ presentation.slug }}',
+                             'decision': '{{ choice.decision_point }}',
+                             'choice': '{{ choice.slug }}'});
+
+        socket.on('msg', function(msg) {
+            var voteCounter = $('#vote-counter').html(msg.val);
+        });
+    });
+</script>
+{% endblock %}

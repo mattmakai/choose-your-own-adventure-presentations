@@ -34,18 +34,6 @@ def presentation(slug):
         abort(404)
 
 
-@app.route('/<slug>/vote/', methods=['GET'])
-def presentation_web_voting(slug):
-    presentations = Presentation.query.filter_by(slug=slug)
-    if presentations.count() > 0:
-        presentation = presentations.first()
-        if presentation.enable_browser_voting:
-            return render_template('voting.html', presentation=presentation,
-                                   choices=presentation.choices_list.
-                                   order_by(Choice.decision_point))
-    return render_template("404.html"), 404
-
-
 @app.route('/cyoa/twilio/webhook/', methods=['POST'])
 def twilio_callback():
     to = request.form.get('To', '')

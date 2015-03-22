@@ -18,4 +18,4 @@ login_manager = LoginManager()
 login_manager.login_view = 'admin_sign_in'
 login_manager.init_app(app)
 
-from . import views, websockets, wizard
+from . import views, websockets, wizard_views, web_voting_views
