@@ -10,26 +10,20 @@
         <div class="col-md-6">
             {% from "partials/_formhelpers.html" import render_field %}
             {% if is_new %}
-            <form action="{{ url_for('admin_new_presentation') }}" 
+            <form action="{{ url_for('wizard_new_choice', pres_id=presentation_id) }}" 
                   method="post">
-            {% else %} 
-            <form action="{{ url_for('admin_edit_presentation', id=presentation.id) }}" method="post">
+            {% else %}
+            <form action="{{ url_for('wizard_edit_choice', pres_id=presentation_id, choice_id=choice.id) }}" method="post">
             {% endif %}
                 <div>
                     {{ form.csrf_token }}
                     {{ render_field(form.name) }}
-                    {{ render_field(form.filename) }}
-                    {{ render_field(form.url_slug) }}
-                    {{ render_field(form.number) }}
-                    {{ render_field(form.choices) }}
-                    <dt style="text-align: left;" class="admin-field">
-                    {{ form.is_active.label }}
-                    {{ form.is_active }}
-                    </dt>
+                    {{ render_field(form.slug) }}
+                    {{ render_field(form.decision_point) }}
                 </div>
                 <div>
                 <input type="submit" class="btn btn-success btn-top-margin" 
-                       value="Save Presentation"></input>
+                       value="Save Choice"></input>
                 </div>
             </form>
         </div>

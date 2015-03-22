@@ -13,13 +13,14 @@
                 No presentations found. 
                 <a href="{{ url_for('wizard_new_presentation') }}">Create your first one</a>.
             {% else %}
-                <table>
+                <table class="table">
                     <thead>
                         <tr>
                             <th>Name</th>
                             <th>Is Active?</th>
-                            <th>Choices Number</th>
-                            <th>Choices Email</th>
+                            <th>Voting number</th>
+                            <th>Web browser voting?</th>
+                            <th>Story choices</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,8 +28,9 @@
                         <tr>
                             <td><a href="{{ url_for('wizard_edit_presentation', id=p.id) }}">{{ p.name }}</a></td>
                             <td>{{ p.is_active }}</td>
-                            <td>{{ p.choices_number }}</td>
-                            <td>{{ p.choices_email }}</td>
+                            <td>{{ p.voting_number }}</td>
+                            <td>{{ p.enable_browser_voting }}</td>
+                            <td><a href="{{ url_for('wizard_list_presentation_choices', pres_id=p.id) }}">Manage choices</a></td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -38,7 +40,7 @@
     </div>
     <div class="row">
         <div class="col-md-10">
-                <div style="margin-top: 20px;">
+                <div class="btn-top-margin">
                     <a href="{{ url_for('wizard_new_presentation') }}"
                        class="btn btn-primary">New Presentation</a>
                 </div>

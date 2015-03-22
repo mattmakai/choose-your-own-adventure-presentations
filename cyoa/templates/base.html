@@ -8,7 +8,7 @@
     <meta name="author" content="Matt Makai">
     <title>{% block title %}{% endblock %}CYOA Presentations</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link href="/static/css/admin.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/wizard.css">
     {% block css_head %}{% endblock %}
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!-- <script src="../../js/ie10-viewport-bug-workaround.js"></script> -->
@@ -19,7 +19,7 @@
       </script>
     <![endif]-->
   </head>
-  <body>
+  <body{% block body_class %}{% endblock %}>
     {% block nav %}{% endblock %}
     {% block content %}{% endblock %}
     {% block js_body %}{% endblock %}

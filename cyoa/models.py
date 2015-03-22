@@ -5,17 +5,17 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 
 
-class User(UserMixin, db.Model):
+class Wizard(UserMixin, db.Model):
     """
-        Represents an admin user in cyoa.
+        Represents a wizard who can access special parts of the application.
     """
-    __tablename__ = 'users'
+    __tablename__ = 'wizards'
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(64), unique=True, index=True)
+    wizard_name = db.Column(db.String(64), unique=True, index=True)
     password_hash = db.Column(db.String(128))
 
-    def __init__(self, email, password):
-        self.email = email
+    def __init__(self, wizard_name, password):
+        self.wizard_name = wizard_name
         self.password = password
 
     @property
@@ -30,7 +30,7 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
 
     def __repr__(self):
-        return '<User %r>' % self.email
+        return '<Wizard %r>' % self.wizard_name
 
 
 class Presentation(db.Model):
@@ -40,16 +40,12 @@ class Presentation(db.Model):
     __tablename__ = 'presentations'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), unique=True)
+    slug = db.Column(db.String(128), unique=True)
     filename = db.Column(db.String(256))
-    url_slug = db.Column(db.String(128))
     is_active = db.Column(db.Boolean, default=False)
-    choices_number = db.Column(db.String(32), default="")
-    choices_email = db.Column(db.String(40), default="")
-    choices = db.relationship('Choice', lazy='dynamic')
-
-    def __init__(self, name, filename):
-        self.name = name
-        self.filename = filename
+    voting_number = db.Column(db.String(32), default="")
+    enable_browser_voting = db.Column(db.Boolean, default=False)
+    choices_list = db.relationship('Choice', lazy='dynamic')
 
     def __repr__(self):
         return '<Presentation %r>' % self.name
@@ -62,12 +58,10 @@ class Choice(db.Model):
     """
     __tablename__ = 'choices'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(64), unique=True)
-    votes = db.Column(db.Integer, default=0)
+    name = db.Column(db.String(64))
+    slug = db.Column(db.String(64))
+    decision_point = db.Column(db.Integer)
     presentation = db.Column(db.Integer, db.ForeignKey('presentations.id'))
-
-    def __init__(self, name):
-        self.name = name
 
     def __repr__(self):
         return '<Choice %r>' % self.name
