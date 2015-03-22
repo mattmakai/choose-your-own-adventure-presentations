@@ -67,7 +67,7 @@ def wizard_new_choice(pres_id):
                            presentation_id=pres_id)
 
 
-@app.route('/wizard/presentation/<int:pres_id>/choice/<int:choice_id>',
+@app.route('/wizard/presentation/<int:pres_id>/choice/<int:choice_id>/',
            methods=['GET', 'POST'])
 @login_required
 def wizard_edit_choice(pres_id, choice_id):
@@ -81,4 +81,16 @@ def wizard_edit_choice(pres_id, choice_id):
         db.session.refresh(choice)
     return render_template('wizard/choice.html', form=form,
                            choice=choice)
+
+
+@app.route('/wizard/presentation/<int:pres_id>/choice/'
+           '<int:choice_id>/delete/')
+@login_required
+def wizard_delete_choice(pres_id, choice_id):
+    presentation = Presentation.query.get_or_404(pres_id)
+    choice = Choice.query.get_or_404(choice_id)
+    db.session.delete(choice)
+    db.session.commit()
+    return redirect(url_for('wizard_list_presentation_choices',
+                    pres_id=presentation.id))
 

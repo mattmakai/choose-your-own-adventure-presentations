@@ -38,4 +38,6 @@ class PresentationForm(Form):
 class ChoiceForm(Form):
     name = StringField('Voting choice name', validators=[Required(),
                                                         Length(1, 60)])
+    slug = StringField('URL slug', validators=[Required(),
+                                               Length(1, 60)])
     decision_point = IntegerField('Decision Point #', validators=[Required()])

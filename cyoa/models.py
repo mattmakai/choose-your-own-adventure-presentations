@@ -59,6 +59,7 @@ class Choice(db.Model):
     __tablename__ = 'choices'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64))
+    slug = db.Column(db.String(64))
     decision_point = db.Column(db.Integer)
     presentation = db.Column(db.Integer, db.ForeignKey('presentations.id'))
 
