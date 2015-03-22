@@ -38,9 +38,11 @@ def presentation(slug):
 def presentation_web_voting(slug):
     presentations = Presentation.query.filter_by(slug=slug)
     if presentations.count() > 0:
-        return render_template('voting.html', presentation=presentations.
-                               first(), choices=presentations.first().
-                               choices_list.order_by(Choice.decision_point))
+        presentation = presentations.first()
+        if presentation.enable_browser_voting:
+            return render_template('voting.html', presentation=presentation,
+                                   choices=presentation.choices_list.
+                                   order_by(Choice.decision_point))
     return render_template("404.html"), 404
 
 
@@ -63,7 +65,8 @@ def twilio_callback():
 def sign_in():
     form = LoginForm()
     if form.validate_on_submit():
-        user = Wizard.query.filter_by(email=form.email.data).first()
+        user = Wizard.query.filter_by(wizard_name=form.
+                                      wizard_name.data).first()
         if user is not None and user.verify_password(form.password.data):
             login_user(user)
             return redirect(url_for('wizard_list_presentations'))

@@ -7,15 +7,15 @@ from . import db
 
 class Wizard(UserMixin, db.Model):
     """
-        Represents a wizard who can access the application.
+        Represents a wizard who can access special parts of the application.
     """
     __tablename__ = 'wizards'
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(64), unique=True, index=True)
+    wizard_name = db.Column(db.String(64), unique=True, index=True)
     password_hash = db.Column(db.String(128))
 
-    def __init__(self, email, password):
-        self.email = email
+    def __init__(self, wizard_name, password):
+        self.wizard_name = wizard_name
         self.password = password
 
     @property
@@ -30,7 +30,7 @@ class Wizard(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
 
     def __repr__(self):
-        return '<Wizard %r>' % self.email
+        return '<Wizard %r>' % self.wizard_name
 
 
 class Presentation(db.Model):

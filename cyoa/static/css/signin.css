@@ -33,7 +33,9 @@ body {
         
         
 .wizard-bg {
-  background: url("/static/img/wizards.jpg") no-repeat center center fixed;
+  background: url("/static/img/magic.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  background-size: cover;
 }
 
 .container.sign-in {
@@ -43,3 +45,4 @@ body {
     padding-bottom: 20px; 
     color: #fff;
 }
+

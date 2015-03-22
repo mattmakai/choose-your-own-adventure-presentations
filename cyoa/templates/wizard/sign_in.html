@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block css_head %}
-    <link href="/static/css/cyoa-part-2.css" rel="stylesheet">
+    <link href="/static/css/signin.css" rel="stylesheet">
 {% endblock %}
 
 {% block body_class %} class="wizard-bg" {% endblock %}
@@ -15,11 +15,11 @@
             <form method="post" action="{{ url_for('sign_in') }}" 
                   id="login-form">
                 {{ form.csrf_token }}
-                {{ render_field(form.email, required=True) }}
+                {{ render_field(form.wizard_name, required=True) }}
                 <br>
                 {{ render_field(form.password, required=True) }}
                 <div style="margin-top: 10px; text-align: right;">
-                    <input class="btn btn-success" 
+                    <input class="btn btn-primary" 
                            type="submit" value="Sign in" />
                 </div>
             </form>
@@ -29,7 +29,7 @@
 <footer class="footer">
     <div class="container">
         <p class="text-muted pull-right">
-        Photo credit: <a href="https://www.flickr.com/photos/38446022@N00/6129242378/in/photolist-5X4jXi-4Mg7NA-4Mg7AA-akz9Ct-9Du31s-9Du2TY-9DqPba-4c4F5-9Dr9op-6k7TQB-9Du2so-9DqPd6-N864-akBXZ9-9DqPeg-akBYdJ-4kxpfE-9Du2qj-7AtrS4-4kxpcE-MzqvJ-9DtH5q-87e1ae-dPRekh-87hcAq-8x7H8y-4ktno8-8RggvW-jgoi9M-u1kYc-2ZFovG-9Du3gb-quxrFH-5tQo2-o62afP-byBjCd-9DtHjy-3enKiV-9Du2rC-nLKwhA-4c4uC-9Du1W5-akBY8h-9DqP5B-qEsPkV-czZBud-czZBms-5foqBE-8RcYcQ-cbJUF">Creative Commons license via Flickr</a>.
+            Photo by <a href="http://photos.jdhancock.com/photo/2012-04-16-000233-a-spot-of-magic.html">JD Hancock</a>
         </p>
     </div>
 </footer>

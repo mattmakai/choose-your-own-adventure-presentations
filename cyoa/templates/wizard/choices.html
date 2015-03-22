@@ -11,7 +11,7 @@
             <h1>Story choices for {{ presentation.name }}</h1>
             {% if choices|length == 0 %}
                 No choices found.
-                <a href="{{ url_for('wizard_new_choice', pres_id=presentation.id) }}">Add a new story choice</a>
+                <a href="{{ url_for('wizard_new_choice', pres_id=presentation.id) }}">Add a new story choice</a>.
             {% else %}
                 <table class="table">
                     <thead>
@@ -32,7 +32,9 @@
                     </tbody>
                 </table>
             {% endif %}
+            <div class="btn-top-margin">
             <a href="{{ url_for('wizard_new_choice', pres_id=presentation.id) }}" class="btn btn-primary">Add story choice</a>
+            </div>
         </div>
     </div>
 </div>
