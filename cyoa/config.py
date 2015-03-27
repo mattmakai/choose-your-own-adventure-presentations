@@ -3,7 +3,6 @@ import os
 # General Flask app settings
 DEBUG = os.environ.get('DEBUG', None)
 SECRET_KEY = os.environ.get('SECRET_KEY', None)
-SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', None)
 
 # Redis connection
 REDIS_SERVER = os.environ.get('REDIS_SERVER', None)
