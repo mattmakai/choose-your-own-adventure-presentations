@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block css_head %}
+    <link href="/static/css/signin.css" rel="stylesheet">
+{% endblock %}
+
+{% block body_class %} class="wizard-bg" {% endblock %}
+
+{% block content %}
+<div class="container sign-in">
+    <div class="col-md-12">
+        <div id="login">
+            <h1>Wizards Only!</h1>
+            {% from "partials/_formhelpers.html" import render_field %}
+            <form method="post" action="{{ url_for('sign_in') }}" 
+                  id="login-form">
+                {{ form.csrf_token }}
+                {{ render_field(form.wizard_name, required=True) }}
+                <br>
+                {{ render_field(form.password, required=True) }}
+                <div style="margin-top: 10px; text-align: right;">
+                    <input class="btn btn-primary" 
+                           type="submit" value="Sign in" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted pull-right">
+            Photo by <a href="http://photos.jdhancock.com/photo/2012-04-16-000233-a-spot-of-magic.html">JD Hancock</a>
+        </p>
+    </div>
+</footer>
+{% endblock %}

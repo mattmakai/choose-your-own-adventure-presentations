@@ -4,15 +4,20 @@ monkey.patch_all()
 import os
 import redis
 
-from cyoa import app, redis_db, socketio
+from cyoa import app, redis_db, socketio, db
+from cyoa.models import Wizard
 from flask.ext.script import Manager, Shell
 
 manager = Manager(app)
 
 def make_shell_context():
-    return dict(app=app, redis_db=redis_db)
+    return dict(app=app, redis_db=redis_db, db=db, Wizard=Wizard)
 
 manager.add_command("shell", Shell(make_context=make_shell_context))
+
+@manager.command
+def syncdb():
+    db.create_all()
 
 @manager.command
 def runserver():
