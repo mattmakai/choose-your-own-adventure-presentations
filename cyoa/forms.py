@@ -3,7 +3,7 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField, \
                     DateField, IntegerField
 from wtforms.validators import Required, Length, Regexp, EqualTo
 from wtforms import ValidationError
-from .models import Wizard, Presentation
+from .models import Wizard
 
 
 class LoginForm(Form):
@@ -21,24 +21,3 @@ class LoginForm(Form):
             self.password.errors.append('Incorrect password.')
             return False
         return True
-
-
-class PresentationForm(Form):
-    name = StringField('Presentation name', validators=[Required(),
-                                                        Length(1, 60)])
-    filename = StringField('File name', validators=[Required(),
-                                                    Length(1, 255)])
-    slug = StringField('URL slug', validators=[Required(),
-                                               Length(1, 255)])
-    is_active = BooleanField()
-    voting_number = StringField('Text-in phone number',
-                                validators=[Length(0, 32)])
-    enable_browser_voting = BooleanField()
-
-
-class ChoiceForm(Form):
-    name = StringField('Voting choice name', validators=[Required(),
-                                                        Length(1, 60)])
-    slug = StringField('URL slug', validators=[Required(),
-                                               Length(1, 60)])
-    decision_point = IntegerField('Decision Point #', validators=[Required()])

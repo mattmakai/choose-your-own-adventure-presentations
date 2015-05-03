@@ -5,14 +5,13 @@ import os
 import redis
 
 from cyoa import app, redis_db, socketio, db
-from cyoa.models import Wizard, Presentation, Choice
+from cyoa.models import Wizard
 from flask.ext.script import Manager, Shell
 
 manager = Manager(app)
 
 def make_shell_context():
-    return dict(app=app, redis_db=redis_db, db=db, Wizard=Wizard,
-                Presentation=Presentation, Choice=Choice)
+    return dict(app=app, redis_db=redis_db, db=db, Wizard=Wizard)
 
 manager.add_command("shell", Shell(make_context=make_shell_context))
 

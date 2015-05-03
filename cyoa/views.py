@@ -1,5 +1,6 @@
 import cgi
-from flask import render_template, abort, request, redirect, url_for
+from flask import render_template, abort, request
+from flask import redirect, url_for
 from flask.ext.login import login_user, logout_user, login_required, \
                             current_user
 from jinja2 import TemplateNotFound
@@ -8,9 +9,9 @@ from twilio.rest import TwilioRestClient
 
 from .config import TWILIO_NUMBER
 from .forms import LoginForm
-from .models import Wizard, Presentation, Choice
+from .models import Wizard
 
-from . import app, redis_db, socketio, db, login_manager
+from . import app, redis_db, socketio, login_manager
 
 client = TwilioRestClient()
 
@@ -18,21 +19,12 @@ client = TwilioRestClient()
 def load_user(userid):
     return Wizard.query.get(int(userid))
 
-
-@app.route('/', methods=['GET'])
-def list_public_presentations():
-    presentations = Presentation.query.filter_by(is_active=True)
-    return render_template('list_presentations.html',
-                           presentations=presentations)
-
-
-@app.route('/<slug>/', methods=['GET'])
-def presentation(slug):
+@app.route('/<presentation_name>/', methods=['GET'])
+def landing(presentation_name):
     try:
-        return render_template('/presentations/' + slug + '.html')
+        return render_template(presentation_name + '.html')
     except TemplateNotFound:
         abort(404)
-
 
 @app.route('/cyoa/twilio/webhook/', methods=['POST'])
 def twilio_callback():
@@ -53,18 +45,23 @@ def twilio_callback():
 def sign_in():
     form = LoginForm()
     if form.validate_on_submit():
-        user = Wizard.query.filter_by(wizard_name=form.
-                                      wizard_name.data).first()
-        if user is not None and user.verify_password(form.password.data):
-            login_user(user)
-            return redirect(url_for('wizard_list_presentations'))
+        wizard = Wizard.query.filter_by(wizard_name=
+                                        form.wizard_name.data).first()
+        if wizard is not None and wizard.verify_password(form.password.data):
+            login_user(wizard)
+            return redirect(url_for('wizard_landing'))
     return render_template('wizard/sign_in.html', form=form, no_nav=True)
 
 
-@app.route('/sign-out/', methods=['GET'])
+@app.route('/sign-out/')
 @login_required
 def sign_out():
     logout_user()
-    return redirect(url_for('list_public_presentations'))
+    return redirect(url_for('sign_in'))
 
+
+@app.route('/wizard/presentations/')
+@login_required
+def wizard_landing():
+    return render_template('wizard/presentations.html')
 

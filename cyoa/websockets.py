@@ -4,10 +4,10 @@ from . import socketio
 
 
 @socketio.on('connect', namespace='/cyoa')
-def ws_connect():
+def test_connect():
     pass
 
 @socketio.on('disconnect', namespace='/cyoa')
-def ws_disconnect():
+def test_disconnect():
     pass
 
