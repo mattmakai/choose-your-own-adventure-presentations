@@ -31,3 +31,17 @@ class Wizard(UserMixin, db.Model):
     def __repr__(self):
         return '<Wizard %r>' % self.wizard_name
 
+
+class Presentation(db.Model):
+    """
+        Contains data regarding a single presentation.
+    """
+    __tablename__ = 'presentations'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64), unique=True)
+    slug = db.Column(db.String(128), unique=True)
+    filename = db.Column(db.String(256))
+    is_visible = db.Column(db.Boolean, default=False)
+
+    def __repr__(self):
+        return '<Presentation %r>' % self.name

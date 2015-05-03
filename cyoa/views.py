@@ -12,6 +12,7 @@ from .forms import LoginForm
 from .models import Wizard
 
 from . import app, redis_db, socketio, login_manager
+from .models import Presentation
 
 client = TwilioRestClient()
 
@@ -19,12 +20,22 @@ client = TwilioRestClient()
 def load_user(userid):
     return Wizard.query.get(int(userid))
 
-@app.route('/<presentation_name>/', methods=['GET'])
-def landing(presentation_name):
-    try:
-        return render_template(presentation_name + '.html')
-    except TemplateNotFound:
-        abort(404)
+
+@app.route('/', methods=['GET'])
+def list_public_presentations():
+    presentations = Presentation.query.filter_by(is_visible=True)
+    return render_template('list_presentations.html',
+                           presentations=presentations)
+
+
+@app.route('/<slug>/', methods=['GET'])
+def presentation(slug):
+    presentation = Presentation.query.filter_by(is_visible=True,
+                                                slug=slug).first()
+    if presentation:
+        return render_template('/presentations/' + presentation.filename)
+    abort(404)
+
 
 @app.route('/cyoa/twilio/webhook/', methods=['POST'])
 def twilio_callback():
@@ -49,7 +60,7 @@ def sign_in():
                                         form.wizard_name.data).first()
         if wizard is not None and wizard.verify_password(form.password.data):
             login_user(wizard)
-            return redirect(url_for('wizard_landing'))
+            return redirect(url_for('wizard_list_presentations'))
     return render_template('wizard/sign_in.html', form=form, no_nav=True)
 
 
@@ -59,9 +70,4 @@ def sign_out():
     logout_user()
     return redirect(url_for('sign_in'))
 
-
-@app.route('/wizard/presentations/')
-@login_required
-def wizard_landing():
-    return render_template('wizard/presentations.html')
 

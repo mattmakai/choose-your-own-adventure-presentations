@@ -21,3 +21,13 @@ class LoginForm(Form):
             self.password.errors.append('Incorrect password.')
             return False
         return True
+
+
+class PresentationForm(Form):
+    name = StringField('Presentation name', validators=[Required(),
+                                                        Length(1, 60)])
+    filename = StringField('File name', validators=[Required(),
+                                                    Length(1, 255)])
+    slug = StringField('URL slug', validators=[Required(),
+                                               Length(1, 255)])
+    is_visible = BooleanField()

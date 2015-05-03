@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <h1>Available presentations</h1>
+                {% for p in presentations %}
+                    <p><a href="{{ url_for('presentation', slug=p.slug) }}">{{ p.name }}</a></p>
+                {% else %}
+                    No public presentations found. 
+                {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

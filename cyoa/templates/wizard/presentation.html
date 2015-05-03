@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block nav %}
+    {% include "nav.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            {% from "partials/_formhelpers.html" import render_field %}
+            {% if is_new %}
+            <form action="{{ url_for('wizard_new_presentation') }}" 
+                  method="post">
+            {% else %} 
+            <form action="{{ url_for('wizard_edit_presentation', id=presentation.id) }}" method="post">
+            {% endif %}
+                <div>
+                    {{ form.csrf_token }}
+                    {{ render_field(form.name) }}
+                    {{ render_field(form.filename) }}
+                    {{ render_field(form.slug) }}
+                    <dt class="admin-field">
+                        {{ form.is_visible.label }}
+                        {{ form.is_visible }}
+                    </dt>
+                </div>
+                <div>
+                <input type="submit" class="btn btn-success btn-top-margin" 
+                       value="Save Presentation"></input>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
