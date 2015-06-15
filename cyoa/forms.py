@@ -31,3 +31,20 @@ class PresentationForm(Form):
     slug = StringField('URL slug', validators=[Required(),
                                                Length(1, 255)])
     is_visible = BooleanField()
+
+
+class DecisionForm(Form):
+    slug = StringField('URL slug', validators=[Required(),
+                                               Length(1, 128)])
+    first_path_slug = StringField('A word for the first path. Must be '
+                                  'lowercase. No spaces.',
+                                  validators=[Required(), Length(1, 64),
+                                              Regexp('[a-z0-9]+', message=
+                                              'Choice must be lowercase '
+                                              'with no whitespace.')])
+    second_path_slug = StringField('A word for the second path. Must be '
+                                   'lowercase. No spaces.',
+                                   validators=[Required(), Length(1, 64),
+                                               Regexp('[a-z-0-9]+', message=
+                                               'Choice must be lowercase '
+                                               'with no whitespace.')])

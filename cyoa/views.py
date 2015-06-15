@@ -9,7 +9,7 @@ from twilio.rest import TwilioRestClient
 
 from .config import TWILIO_NUMBER
 from .forms import LoginForm
-from .models import Wizard
+from .models import Wizard, Decision
 
 from . import app, redis_db, socketio, login_manager
 from .models import Presentation
@@ -71,3 +71,38 @@ def sign_out():
     return redirect(url_for('sign_in'))
 
 
+@app.route('/<presentation_slug>/vote/<decision_slug>/', methods=['GET'])
+def decision(presentation_slug, decision_slug):
+    presentations = Presentation.query.filter_by(slug=presentation_slug)
+    if presentations.count() > 0:
+        presentation = presentations.first()
+        decision = Decision.query.filter_by(presentation=presentation.id,
+                                            slug=decision_slug).first()
+        return render_template('decision.html', presentation=presentation,
+                               decision=decision)
+    return render_template("404.html"), 404
+
+
+@app.route('/<presentation_slug>/vote/<decision_slug>/<choice_slug>/',
+           methods=['GET'])
+def web_vote(presentation_slug, decision_slug, choice_slug):
+    presentations = Presentation.query.filter_by(slug=presentation_slug)
+    if presentations.count() > 0:
+        presentation = presentations.first()
+        decision = Decision.query.filter_by(presentation=presentation.id,
+                                            slug=decision_slug).first()
+        if decision:
+            votes = redis_db.get(choice_slug)
+            return render_template('web_vote.html', decision=decision,
+                                   presentation=presentation, votes=votes,
+                                   choice=choice_slug)
+    return render_template("404.html"), 404
+
+
+def broadcast_vote_count(key):
+    total_votes = 0
+    if redis_db.get(key):
+        total_votes += int(redis_db.get(key))
+    total_votes += len(socketio.rooms['/cyoa'][key])
+    socketio.emit('msg', {'div': key, 'val': total_votes},
+                  namespace='/cyoa')

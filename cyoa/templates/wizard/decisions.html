@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block nav %}
+    {% include "nav.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <h1>{{ presentation.name }} Decisions</h1>
+            {% if decisions|length == 0 %}
+                No web browser voting enabled for 
+                <em>{{ presentation.name }}</em>.
+                <a href="{{ url_for('wizard_new_decision', pres_id=presentation.id) }}">Add a decision point for this presentation</a>.
+            {% else %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Decision</th>
+                            <th>First story path</th>
+                            <th>Second story path</th>
+                            <th>Delete</th>
+                            <th>View choice</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for d in decisions %}
+                        <tr>
+                            <td><a href="{{ url_for('wizard_edit_decision', presentation_id=presentation.id, decision_id=d.id) }}">{{ d.slug }}</a></td>
+                            <td>{{ d.first_path_slug }}</td>
+                            <td>{{ d.second_path_slug }}</td>
+                            <td><a href="{{ url_for('wizard_delete_decision', pres_id=presentation.id, decision_id=d.id) }}" class="btn btn-danger">X</a></td>
+                            <td><a href="{{ url_for('decision', presentation_slug=presentation.slug, decision_slug=d.slug) }}" target="_blank">{{ d.slug }}</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+            <div class="btn-top-margin">
+            <a href="{{ url_for('wizard_new_decision', pres_id=presentation.id) }}" class="btn btn-primary">Add decision point</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

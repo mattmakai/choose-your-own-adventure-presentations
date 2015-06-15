@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block nav %}
+    {% include "nav.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            {% from "partials/_formhelpers.html" import render_field %}
+            {% if is_new %}
+            <form action="{{ url_for('wizard_new_decision', pres_id=presentation_id) }}" 
+                  method="post">
+            {% else %}
+            <form action="{{ url_for('wizard_edit_decision', presentation_id=presentation_id, decision_id=decision.id) }}" method="post">
+            {% endif %}
+                <div>
+                    {{ form.csrf_token }}
+                    {{ render_field(form.slug) }}
+                    {{ render_field(form.first_path_slug) }}
+                    {{ render_field(form.second_path_slug) }}
+                </div>
+                <div>
+                <input type="submit" class="btn btn-success btn-top-margin" 
+                       value="Save Decision"></input>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

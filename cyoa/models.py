@@ -42,6 +42,23 @@ class Presentation(db.Model):
     slug = db.Column(db.String(128), unique=True)
     filename = db.Column(db.String(256))
     is_visible = db.Column(db.Boolean, default=False)
+    decisions = db.relationship('Decision', lazy='dynamic')
 
     def __repr__(self):
         return '<Presentation %r>' % self.name
+
+
+class Decision(db.Model):
+    """
+        A branch in the storyline that an audience member can vote on.
+        Must map directly into what is stored in Redis.
+    """
+    __tablename__ = 'choices'
+    id = db.Column(db.Integer, primary_key=True)
+    slug = db.Column(db.String(128))
+    first_path_slug = db.Column(db.String(128))
+    second_path_slug = db.Column(db.String(128))
+    presentation = db.Column(db.Integer, db.ForeignKey('presentations.id'))
+
+    def __repr__(self):
+        return '<Decision %r>' % self.slug

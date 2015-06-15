@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>What path do you choose?</h2>
+            <a href="{{ url_for('web_vote', presentation_slug=presentation.slug, decision_slug=decision.slug, choice_slug=decision.first_path_slug) }}" class="btn btn-lg btn-success">{{ decision.first_path_slug }}</a>
+            <a href="{{ url_for('web_vote', presentation_slug=presentation.slug, decision_slug=decision.slug, choice_slug=decision.second_path_slug) }}" class="btn btn-lg btn-success">{{ decision.second_path_slug }}</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
