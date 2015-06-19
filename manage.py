@@ -24,6 +24,11 @@ def runserver():
     socketio.run(app, "0.0.0.0", port=5001)
 
 @manager.command
+def create_wizard(name, password):
+    db.session.add(Wizard(name, password))
+    db.session.commit()
+
+@manager.command
 def clear_redis():
     redis_cli = redis.StrictRedis(host='localhost', port='6379', db='0')
     redis_cli.delete('done')
