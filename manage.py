@@ -25,8 +25,12 @@ def runserver():
 
 @manager.command
 def create_wizard(name, password):
-    db.session.add(Wizard(name, password))
-    db.session.commit()
+    try:
+        db.session.add(Wizard(name, password))
+        db.session.commit()
+    except:
+        # user already created. swallow
+        pass
 
 @manager.command
 def clear_redis():
