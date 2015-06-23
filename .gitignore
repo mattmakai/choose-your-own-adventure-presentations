@@ -8,4 +8,5 @@
 *.log
 assets
 tmp/
-setenvs.sh
+.env
+celerybeat-schedule
