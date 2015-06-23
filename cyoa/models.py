@@ -56,6 +56,7 @@ class Decision(db.Model):
     __tablename__ = 'choices'
     id = db.Column(db.Integer, primary_key=True)
     slug = db.Column(db.String(128))
+    votes = db.Column(db.Integer(), default=0)
     first_path_slug = db.Column(db.String(128))
     second_path_slug = db.Column(db.String(128))
     presentation = db.Column(db.Integer, db.ForeignKey('presentations.id'))
