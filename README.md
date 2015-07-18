@@ -20,7 +20,7 @@ along with the follow-up three part tutorial:
 
 1. [Wizards Only](https://www.twilio.com/blog/2015/03/choose-your-own-adventures-presentations-wizard-mode-part-1-of-3.html)
 1. [Even Wizards Need Web Forms](https://www.twilio.com/blog/2015/05/choose-your-own-adventure-presentations-wizard-mode-part-2-of-3.html)
-1. Voting with a Wand (or Smartphone) (coming soon)
+1. [Voting with a Wand (or Smartphone)](https://www.twilio.com/blog/2015/07/choose-your-own-adventure-presentations-flask-reveal-js-websockets.html)
 
 
 ## See it in action
