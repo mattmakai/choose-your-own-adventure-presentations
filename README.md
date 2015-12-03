@@ -1,6 +1,9 @@
 # Choose Your Own Adventure Presentations
 Use this code to create real-time branching presentations so 
-audiences can choose the path through your next technical talk.
+your audience can choose the path through your next technical talk.
+
+This project also is the default WSGI application for the
+[Full Stack Python Guide to Deployments](http://www.deploypython.com/) book.
 
 Here's a screenshot of the vanilla choices screen. You can of course modify
 this initial screen with your own styles and visualizations.
